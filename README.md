@@ -1,90 +1,111 @@
-# 🚛 Chamada Caminhões
+# Sistema Frota
 
-Sistema de chamada e acompanhamento de caminhões em tempo real. As solicitações feitas no painel web são exibidas automaticamente em uma TV na sala de espera, e o status de cada chamada (aguardando, em atendimento, finalizado) é identificado a partir dos dados do SAP HANA, com notificações automáticas por e-mail.
+<div align="center">
 
----
+[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-blue)](https://github.com/Usguri/Sistema-frota)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+[![Logística](https://img.shields.io/badge/Setor-Log%C3%ADstica-green)](https://github.com/Usguri/Sistema-frota)
+[![Métricas](https://img.shields.io/badge/M%C3%A9tricas-Indicadores-orange)](https://github.com/Usguri/Sistema-frota)
 
-## 🔥 Funcionalidades
+</div>
 
-- Registro e chamada de caminhões pelo painel web
-- Exibição automática na TV da sala de espera
-- Identificação e exibição de status em tempo real
-- Integração com SAP HANA para busca de dados por serial
-- Jobs automáticos de notificação por e-mail
-- Cache e tempo real com Redis
-- Relatórios gráficos com ApexCharts
-- Exportação para Excel
-- Geração de Romaneio
+Sistema de controle e monitoramento para caminhões, com registro de tempo de espera e carregamento para análise operacional e melhoria de processos logísticos.
 
----
+## 📦 Visão geral
 
-## ⚙️ Tecnologias
+Este projeto foi desenvolvido para monitorar a operação de veículos em um processo logístico, permitindo registrar eventos importantes e transformar essas informações em métricas úteis para gestão.
 
-| Camada          | Stack                                                 |
-| --------------- | ----------------------------------------------------- |
-| Frontend        | React, React Router DOM, Vite, ApexCharts             |
-| Backend PHP     | PHP 8.0, Apache, PDO                                  |
-| Backend Node.js | Node.js 18, Express, MySQL2, SAP HANA Client, Nodemon |
-| Bancos e cache  | MySQL, SAP HANA, Redis                                |
-| Infraestrutura  | Docker, Docker Compose, Apache                        |
+## 🎯 Problema resolvido
 
----
+Operações logísticas geralmente sofrem com:
 
-## 🧠 Arquitetura e conceitos
+- ausência de controle de tempo de espera;
+- falta de padronização de registros;
+- baixa visibilidade dos gargalos operacionais;
+- dificuldade para analisar atrasos e produtividade.
 
-- Arquitetura multi-backend (PHP + Node.js)
-- Repository Pattern
-- Jobs agendados com `setInterval`
-- Integração com SAP HANA
-- Cache com Redis
-- Envio de e-mails automatizado
-- Containerização com Docker Compose
-- Variáveis de conexão configuráveis por ambiente
+O sistema torna esse processo mais transparente e ajuda a tomada de decisão com base em dados reais.
 
----
+## ✨ Funcionalidades
 
-## 🧩 Estrutura do projeto
+- registro de chamada de caminhões;
+- controle de status de espera e carregamento;
+- coleta de tempos por operação;
+- geração de métricas e indicadores;
+- acompanhamento de atrasos e gargalos;
+- suporte à análise de eficiência logística.
 
-```
-frontend/              Aplicação React (painel e TV)
-backend/
-├── php/                API PHP e regras de negócio
-└── nodejs/              API Node.js, jobs e integrações
-docker-compose.yml      Orquestração das APIs e do Redis
-Painel de patio/        Versão legada, independente da aplicação atual
+## 🏗️ Arquitetura
+
+```text
+Operador / Gestão
+      |
+      v
+Sistema de registro
+      |
+      v
+Dados da operação
+      |
+      v
+Métricas, indicadores e análise
 ```
 
----
+## 🛠️ Stack tecnológica
+
+- JavaScript
+- lógica operacional para gestão de frota
+- processamento e organização de dados
+- relatórios e indicadores de desempenho
+
+## 🔄 Fluxo principal
+
+1. O caminhão entra no processo de operação.
+2. O operador registra a chamada e o status atual.
+3. O sistema acompanha tempo de espera e carregamento.
+4. Os dados são consolidados em métricas.
+5. A gestão analisa os indicadores para reduzir atrasos e otimizar a operação.
 
 ## 🚀 Como executar
 
-Suba as APIs e o Redis com Docker Compose:
-
 ```bash
-docker compose up --build -d
+git clone https://github.com/Usguri/Sistema-frota.git
+cd Sistema-frota
+npm install
+npm start
 ```
 
-Instale as dependências e inicie o frontend em outro terminal:
+> Ajuste os passos conforme a estrutura real do projeto e os comandos executados na aplicação.
 
-```bash
-cd frontend
-npm ci
-npm run dev
-```
+## 📈 Indicadores relevantes
 
-O frontend estará disponível em `http://localhost:5173`. A API PHP usa a porta
-`8191`, a API Node.js usa a porta `4002` e o Redis usa a porta `6379`.
+- tempo médio de espera;
+- tempo de carregamento;
+- volume de registros por período;
+- gargalos por turno ou operação;
+- comparação entre turnos e dias.
 
----
+## 💡 Diferencial do projeto
 
-## ⚠️ Pontos de atenção
+O sistema agrega valor ao transformar informações operacionais em dados estratégicos. Em logística, isso é essencial para reduzir desperdício, melhorar a produtividade e aumentar a previsibilidade da operação.
 
-- Mover as credenciais de banco do código Node.js para `.env`
-- Restringir o CORS (hoje `*` no PHP) em produção
-- Reativar o `React.StrictMode` no frontend
+## 📊 Impacto esperado
 
----
+- redução de atrasos;
+- melhoria do controle interno;
+- visão mais clara da operação;
+- apoio à tomada de decisão com base em indicadores.
 
-## 👨‍💻 Autor
+## 🧭 Status
 
-**Vinícius Mendes**, Desenvolvedor Full Stack
+Em desenvolvimento, com foco em automação operacional e análise de desempenho.
+
+## 🔜 Próximos passos
+
+- melhorar a interface para gestão;
+- adicionar gráficos e relatórios comparativos;
+- permitir filtros por data, turno e veículo;
+- ampliar a visualização de indicadores das operações.
+
+## 📝 Observação
+
+Este README foi pensado para apresentar o projeto com uma visão mais profissional, alinhada ao impacto real da solução em logística e operações.
