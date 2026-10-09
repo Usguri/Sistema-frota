@@ -1,0 +1,29 @@
+services:
+  php-apache:
+    build:
+      context: ./apache
+      dockerfile: Dockerfile
+    volumes:
+      - ./public:/var/www/html
+    ports:
+      - "8191:80"
+    networks:
+      - app-network
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - app-network
+
+volumes:
+  redis_data:
+
+
+networks:
+  app-network:
+
+

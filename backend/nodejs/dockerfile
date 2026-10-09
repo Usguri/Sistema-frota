@@ -1,0 +1,26 @@
+FROM node:18-alpine
+
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    libc6-compat \
+    curl \
+    unixodbc \
+    unixodbc-dev \
+    mariadb-client \
+    mariadb-connector-c-dev
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+RUN npm install @sap/hana-client mysql2
+RUN npm install -g nodemon
+
+COPY . .
+
+EXPOSE 4002
+
+CMD ["npm", "run", "dev"] 

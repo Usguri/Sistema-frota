@@ -1,0 +1,39 @@
+services:
+  php-apache:
+    build:
+      context: ./backend/php/apache
+      dockerfile: dockerfile
+    volumes:
+      - ./backend/php:/var/www/html
+    ports:
+      - "8191:80"
+    networks:
+      - app-network
+  redis:
+    image: redis:latest
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - app-network
+  nodejs:
+    build:
+      context: ./backend/nodejs
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/nodejs:/app
+      - /app/node_modules
+    ports:
+      - "4002:4002"
+    command: npm run dev
+    networks:
+      - app-network
+
+volumes:
+  redis_data:
+
+
+networks:
+  app-network:
